@@ -1,15 +1,23 @@
-
 {
-    "name": "note-taker",
-    "version": "1.0.0",
-    "description": "",
-    "main": "server.js",
-    "scripts": {
-      "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "author": "",
-    "license": "ISC",
-    "dependencies": {
-      "express": "^4.16.4"
-    }
-  }
+  "name": "note-taker",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.3",
+    "inquirer": "^8.2.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ejimenez22/Write-this-down.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ejimenez22/Write-this-down/issues"
+  },
+  "homepage": "https://github.com/ejimenez22/Write-this-down#readme"
+}
