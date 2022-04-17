@@ -48,13 +48,16 @@ app.post('/api/notes', (req, res) => {
 
 //delete notes
 app.delete('/api/notes/:id', (req, res) => {
-  const result = findById(req.body.id, notes);
- 
-  if (result === -1) return res.status(404).json({})
- 
-  notes.splice(result, 1)
-  res.json(note)
- })
+  const id = req.params.id
+
+  notes.findByIdAndDelete(id)
+  .then( result => {
+    res.json({ redirect: '/notes' })
+  })
+  .catch(err => {
+    console.log(err)
+  })
+})
 
 
 app.listen(PORT, () => {
