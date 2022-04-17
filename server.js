@@ -2,7 +2,7 @@ const express = require('express')
 const fs = require('fs')
 const path = require('path')
 const { notes } = require('./db/db.json')
-const uuid = require('uuid')
+const { v4: uuidv4 } = require('uuid');
 const app = express()
 const PORT = process.env.PORT || 3001;
 
@@ -40,18 +40,20 @@ app.get('/api/notes', (req, res) => {
 })
 
 app.post('/api/notes', (req, res) => {
+  req.body.id = uuidv4()
+  console.log(uuidv4())
   const note = generateNote(req.body, notes)
   res.json(note)
 })
 
 //delete notes
-app.delete('/api/notes', (req, res) => {
-  const userIndex = getUserIndex(req.params.userId)
+app.delete('/api/notes/:id', (req, res) => {
+  const result = findById(req.body.id, notes);
  
-  if (userIndex === -1) return res.status(404).json({})
+  if (result === -1) return res.status(404).json({})
  
-  users.splice(userIndex, 1)
-  res.json(users)
+  notes.splice(result, 1)
+  res.json(note)
  })
 
 
