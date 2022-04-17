@@ -2,7 +2,7 @@ const express = require('express')
 const fs = require('fs')
 const path = require('path')
 const { notes } = require('./db/db.json')
-const uniqueId = require('uuid')
+const { uniqueId } = require('uuid')
 const app = express()
 const PORT = process.env.PORT || 3001;
 
@@ -41,6 +41,7 @@ app.get('/api/notes', (req, res) => {
 
 app.post('/api/notes', (req, res) => {
   const note = generateNote(req.body, notes)
+  req.body.id = uniqueId(note)
   res.json(note)
 })
 
