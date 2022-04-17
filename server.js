@@ -1,7 +1,9 @@
 const express = require('express')
 const fs = require('fs')
 const path = require('path')
-const { v4: uuidv4 } = require('uuid')
+const notes = require('./db/db.json')
+const uniqueId = require('uuid')
+const { json } = require('express/lib/response')
 const app = express()
 const PORT = process.env.PORT || 3001;
 
@@ -13,8 +15,16 @@ app.use(express.json())
 
 app.use(express.static('public'))
 
+// generate new notes
+function generateNote(body, notesArray) {
+  const note = body;
+  notesArray.push(note)
+  fs.writeFile(
+    path.join(__dirname, './db/db.json'),
+    JSON.stringify({notes: notesArray}, null, 1)
+  )
 
-
+}
 
 // html routes
 app.get('/', (req, res) => {
@@ -31,7 +41,8 @@ app.get('/api/notes', (req, res) => {
 })
 
 app.post('/api/notes', (req, res) => {
-  req.body.id = notes.uuid.v4()
+  const note = generateNote(req.body, notes)
+  res.json(note)
 })
 
 
