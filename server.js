@@ -19,11 +19,11 @@ app.use(express.static('public'))
 function generateNote(body, notesArray) {
   const note = body;
   notesArray.push(note)
-  fs.writeFile(
+  fs.writeFileSync(
     path.join(__dirname, './db/db.json'),
     JSON.stringify({notes: notesArray}, null, 1)
   )
-
+  return note
 }
 
 // html routes
